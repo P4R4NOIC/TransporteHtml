@@ -103,8 +103,27 @@ function processValue(){
 
     let oferta = newMatrix.map(fila => fila.pop()); 
     oferta.pop();
-    
     let demanda = newMatrix.pop(); 
+
+    let sumaOferta = oferta.reduce((acc, val) => acc + val, 0);
+    let sumaDemanda = demanda.reduce((acc, val) => acc + val, 0);
+    let diferencia = Math.abs(sumaOferta-sumaDemanda);
+    if (sumaOferta < sumaDemanda) {
+        console.log('Inserta fila');
+    
+        // Crear una fila de ceros del mismo tamaño que las columnas actuales
+        let nuevaFila = Array(newMatrix[0].length).fill(0);
+        newMatrix.push(nuevaFila);  // Agregar la fila a la matriz
+        oferta.push(diferencia);  // Agregar un 0 en la oferta para mantener la consistencia
+    }
+    
+    if (sumaOferta > sumaDemanda) {
+        console.log('Inserta columna');
+    
+        // Agregar un 0 al final de cada fila de la matriz
+        newMatrix.forEach(fila => fila.push(0));
+        demanda.push(diferencia);  // Agregar un 0 en la demanda para mantener la consistencia
+    }
 
     // MaxValue
     let maxValue = Math.max(
