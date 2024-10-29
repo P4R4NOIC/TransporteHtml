@@ -1,0 +1,69 @@
+/* main.css */
+
+body {
+    background-image: url("watermelon.avif");
+    background-size: 300px 300px; /* Cambia el tamaño de la imagen */
+    background-repeat: repeat; /* Hace que la imagen se repita */
+    background-position: top left; /* Posiciona la imagen en la esquina superior izquierda */
+    font-family: Arial, sans-serif;
+    background-color: #f0f8ff;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.form-container {
+    background-color: #99d16d; /* Verde suave */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.3);
+    width: 300px;
+}
+
+label {
+    font-size: small;
+    display: block;
+    margin-bottom: 5px;
+    color: black;
+}
+
+select, input[type="text"], button {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 15px;
+    border-radius: 4px;
+    border: 1px solid #99d16d; /* Color de borde */
+    background-color: whitesmoke; /* Color de fondo */
+    box-sizing: border-box;
+}
+
+select:focus, input[type="text"]:focus {
+    border-color: #99d16d; /* Borde al hacer foco */
+    background-color: rgba(245, 245, 245, 0.616); /* Color de fondo al hacer foco */
+    outline: none;
+}
+
+select{
+    color: #86c55a;
+}
+
+button {
+    background-color: #f28f8f; /* Rojo suave */
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+    background-color: #c9302c; /* Rojo más oscuro */
+    transform: translateY(-2px);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+}
+button:active {
+    background-color: #f28f8f;
+    transform: translateY(0);
+}

@@ -1,0 +1,114 @@
+/* Estilos generales para el cuerpo */
+body {
+    background-image: url("watermelon.avif");
+    background-size: 300px 300px;
+    background-repeat: repeat;
+    background-position: top left;
+    
+    font-family: Arial, sans-serif;
+    background-color: #f0f8ff;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Estilos para el contenedor del formulario */
+#formContainer {
+    background-color: #99d16d;
+    border-radius: 10px;
+    box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.3);
+    padding: 20px;
+    
+    min-width: 300px;
+    margin: 0 auto;
+    text-align: center;
+    overflow-x: auto;
+    overflow-y: auto;
+    max-height: 80vh;
+    white-space: nowrap;
+}
+
+/* Para pantallas pequeñas */
+@media (max-width: 600px) {
+    #formContainer {
+        padding: 10px;
+        max-width: 100%;
+        min-width: unset;
+    }
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 20px;
+}
+
+th, td {
+    border: 1px solid #333;
+    padding: 10px;
+    text-align: center;
+}
+
+/* Aplicar estilo de encabezado a primera fila y primera columna */
+th, td:first-child, tr:first-child td {
+    background-color: #4CAF50;
+    color: white;
+    font-weight: bold;
+}
+
+/* Estilo para las celdas y sus inputs */
+td {
+    background-color: #f0f0f0;
+    padding: 0; /* Eliminar padding para que el input use todo el espacio */
+}
+
+input {
+    width: 100%; /* Abarcar todo el ancho disponible */
+    height: 100%; /* Abarcar todo el alto disponible */
+    border: 0px solid black;
+    background-color: #6fe013;
+    box-sizing: border-box; /* Asegura que el borde y el padding no afecten el tamaño del input */
+    padding: 5px; /* Espacio interno del input */
+    text-align: center;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Mejorar comportamiento al enfocar */
+input:focus {
+    border-color: #66afe9;
+    box-shadow: 0 0 10px rgb(0, 61, 10);
+    outline: none;
+}
+
+input[disabled] {
+    background-color: #4CAF50;
+    cursor: not-allowed;
+}
+
+
+/* Estilos para los botones */
+button {
+    background-color: #f28f8f;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+    margin-right: 10px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+    background-color: #c9302c;
+    transform: translateY(-2px);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+button:active {
+    background-color: #f28f8f;
+    transform: translateY(0);
+}

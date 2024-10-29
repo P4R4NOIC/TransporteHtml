@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="main.css">
+    <title>Transporte</title>
+</head>
+<body>
+    <div class="form-container">
+        <div>
+            <label for="funcType">Tipo de función</label>
+            <select name="funcType" id="funcType">
+                <option value="0">Minimización</option>
+                <option value="1">Maximización</option>
+            </select>
+        </div>
+        <div>
+            <label for="firstSol">Solución Primera Fase</label>
+            <select name="firstSol" id="firstSol">
+                <option value="0">Esquina Norte-Oeste ENO</option>
+                <option value="1">Matriz Costo Mínimo MCM</option>
+                <option value="2">Vogel Vog</option>
+            </select>
+        </div>
+        <div>
+            <label for="secondSol">Solución Segunda Fase</label>
+            <select name="secondSol" id="secondSol">
+                <option value="0">Stepping Stone</option>
+                <option value="1">Modi/UV</option>
+            </select>
+        </div>
+        <div>
+            <label for="row">Cantidad de filas</label>
+            <input type="text" id="row" name="row">
+        </div>
+        <div>
+            <label for="col">Cantidad de columnas</label>
+            <input type="text" id="col" name="col">
+        </div>
+        <div>
+            <button type="button" onclick="ingresarValores()">Continuar</button>
+        </div>
+    </div>
+
+    <script>
+        function ingresarValores() {
+            // Obtén los valores de los campos de entrada
+            var funcType = document.getElementById('funcType').value;
+            var firstSol = document.getElementById('firstSol').value;
+            var secondSol = document.getElementById('secondSol').value;
+            var rows = document.getElementById('row').value;
+            var cols = document.getElementById('col').value;
+
+            if (isNaN(rows) || isNaN(cols) || 
+                rows.trim() === "" || cols.trim() === "") {
+                alert.log('Por favor, ingresa valores numéricos para las filas y columnas.');
+                return; 
+            }
+
+            if (Number(rows) <= 0 || Number(cols) <= 0) {
+                alert.log('Por favor, ingresa valores numéricos positivos para las filas y columnas.');
+                return; 
+            }
+
+            // Guarda los valores en el localStorage
+            localStorage.setItem('funcType', funcType);
+            localStorage.setItem('firstSol', firstSol);
+            localStorage.setItem('secondSol', secondSol);
+            localStorage.setItem('rows', rows);
+            localStorage.setItem('cols', cols);
+
+            // Muestra un mensaje de confirmación (opcional)
+            console.log('Valores guardados: \nFunción: ' + funcType +
+                                            '\nrows: ' + rows + 
+                                            '\ncols: ' + cols );
+            window.location.href = "ingresoValores.html";
+        }
+    </script>
+</body>
+
+</html>
