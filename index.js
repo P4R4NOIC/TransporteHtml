@@ -21,6 +21,11 @@ let a = [[4, 3, 0, 5],
 let demand = [15, 19, 18, 8];
 let offer = [24, 17, 19];
 let matrixT = []
+let modiFlagSolve = 0;  //set items
+let stepStoneDone = 0;  //set items
+
+
+// esta transformacion se hace a la matriz inicial 
 for (let i = 0; i < a.length; i++){
   let c = []
   for(let j = 0; j < a[i].length; j++){
@@ -30,8 +35,10 @@ for (let i = 0; i < a.length; i++){
   matrixT.push(c);
 }
 
-
-
+// la matrixT es la que se va a manejar para todo por lo que debe ser un item
+//si quiere representarlo matrixT[i][j].value y la asignacion esta en matrixT[i][j].asignV
+//podria utilizar esto matrixT[i][j].value+(matrixT[i][j].flagA?"("+matrixT[i][j].asignV+")":""); 
+//que usa el ternario para ver si hay asignacion para concatenar el valor asignado
 
 
 function defineMovements(colM, rowM, come){
@@ -147,6 +154,7 @@ function loopAsign(x, y){
   return asignList;
 }
 
+
 function edgeNorWeast(){
   let row = 0;
   let col = 0;
@@ -167,7 +175,6 @@ function edgeNorWeast(){
   }
 
 }
-//minCostMatrix();
 function minCostMatrix( ){
   let dTemp = demand.slice();
   let oTemp = offer.slice();
@@ -352,7 +359,7 @@ function vogelMethod(){
   oTemp[lastAsign.row]-= max;
   dTemp[lastAsign.col]-= max;
 }
-let modiFlagSolve = 0;
+
 
 function modi(){
   if (!modiFlagSolve){
@@ -477,6 +484,77 @@ function modi(){
   
 }
 
-function steppingStone(){
 
+function steppingStone(){
+  if (!stepStoneDone){
+    let matrixRedChange = [];
+    for (let i = 0; i < matrixT.length; i++){
+      let mt = new Array(matrixT[0].length).fill(0);
+      matrixRedChange.push(mt);
+    }
+    for (let i = 0; i < matrixT.length; i++){
+      for(let j = 0; j < matrixT[0].length; j++){
+        if (!matrixT[i][j].flagA){
+          let asignList = loopAsign(j, i);
+          let rcCost = asignList[0].value;
+          for(let k = 1; k < asignList.length; k++){
+            if(k%2){
+              rcCost -= asignList[k].value;
+            }else{
+              rcCost += asignList[k].value;
+            }
+          }
+          matrixRedChange[i][j] = rcCost;
+        }else{
+          matrixRedChange[i][j] = null;
+        }
+      }
+    }
+    let rcRow = null;
+    let rcCol = null;
+    let minRCValue = 0;
+    for (let i = 0; i < matrixRedChange.length; i++){
+      for(let j = 0; j < matrixRedChange[0].length; j++){
+        if (matrixRedChange[i][j] != null){
+          if (minRCValue > matrixRedChange[i][j]){
+            rcCol = j;
+            rcRow = i;
+            minRCValue = matrixRedChange[i][j];
+          }      
+        }
+      }
+    }
+    if(minRCValue == 0){
+      stepStoneDone = 1;
+      return
+    }else{
+      let asignFixList = loopAsign(rcCol, rcRow);
+      let valueToFix = null;
+      for(let i = 1; i < asignFixList.length; i++){
+        if(i%2){
+          if(valueToFix == null){
+            valueToFix = asignFixList[i].asignV;
+          }else{
+            if(valueToFix > asignFixList[i].asignV){
+              valueToFix = asignFixList[i].asignV;
+              
+            }
+          }
+        }
+      }
+      matrixT[asignFixList[0].row][asignFixList[0].col].setAsignV(valueToFix);
+      matrixT[asignFixList[0].row][asignFixList[0].col].setFlag();
+      for(let i = 1; i < asignFixList.length; i++){
+        if(i%2){
+          matrixT[asignFixList[i].row][asignFixList[i].col].setAsignV(matrixT[asignFixList[i].row][asignFixList[i].col].asignV - valueToFix); 
+          if (matrixT[asignFixList[i].row][asignFixList[i].col].asignV == 0){
+            matrixT[asignFixList[i].row][asignFixList[i].col].setFlag();
+            matrixT[asignFixList[i].row][asignFixList[i].col].setAsignV(null);
+          }
+        }else{
+          matrixT[asignFixList[i].row][asignFixList[i].col].setAsignV(matrixT[asignFixList[i].row][asignFixList[i].col].asignV + valueToFix);
+        }
+      }
+    }
+  }
 }
