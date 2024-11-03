@@ -142,7 +142,7 @@ function loopAsign(x, y){
     while(done == 1);
     if(done == 0){
       actual = matrixT[posRow][posCol];
-      matrixT[posRow][posCol].setFlag();
+      matrixT[posRow][posCol].flagA = true;
       asignList.push(matrixT[posRow][posCol]);
       movements.push(defineMovements(posCol, posRow, move));
       done =1;
@@ -170,8 +170,8 @@ function edgeNorWeast(){
   let dTemp = demand.slice();
   let oTemp = offer.slice();
   while (row < oTemp.length || col < dTemp.length){
-    matrixT[row][col].setAsignV(Math.min(oTemp[row], dTemp[col])); 
-    matrixT[row][col].setFlag();
+    matrixT[row][col].asignV = Math.min(oTemp[row], dTemp[col]); 
+    matrixT[row][col].flagA = 1;
     let t = Math.min(oTemp[row], dTemp[col]);
     oTemp[row]-= t;
     dTemp[col]-= t;
@@ -221,8 +221,8 @@ function minCostMatrix( ){
         }
       });
     }
-    matrixT[min.row][min.col].setAsignV(max); 
-    matrixT[min.row][min.col].setFlag();  
+    matrixT[min.row][min.col].asignV = max; 
+    matrixT[min.row][min.col].flagA = 1;  
     oTemp[min.row]-= max;
     dTemp[min.col]-= max;
     for (let i = 0; i< checkMatrix.length;i++){
@@ -349,8 +349,8 @@ function vogelMethod(){
     }
     //asignar el valor
     let max = Math.min(dTemp[minAsign.col], oTemp[minAsign.row]);
-    matrixT[minAsign.row][minAsign.col].setAsignV(max); 
-    matrixT[minAsign.row][minAsign.col].setFlag();  
+    matrixT[minAsign.row][minAsign.col].asignV = max; 
+    matrixT[minAsign.row][minAsign.col].flagA = 1;  
     
     oTemp[minAsign.row]-= max;
     dTemp[minAsign.col]-= max;
@@ -364,8 +364,8 @@ function vogelMethod(){
   }
   //asignar el ultimo valor
   let max = Math.min(dTemp[lastAsign.col], oTemp[lastAsign.row]);
-  matrixT[lastAsign.row][lastAsign.col].setAsignV(max); 
-  matrixT[lastAsign.row][lastAsign.col].setFlag();  
+  matrixT[lastAsign.row][lastAsign.col].asignV = max; 
+  matrixT[lastAsign.row][lastAsign.col].flagA = 1;  
   oTemp[lastAsign.row]-= max;
   dTemp[lastAsign.col]-= max;
 }
@@ -473,21 +473,21 @@ function modi(){
           }
         }
       }
-      matrixT[asignFixList[0].row][asignFixList[0].col].setAsignV(valueToFix);
-      matrixT[asignFixList[0].row][asignFixList[0].col].setFlag();
+      matrixT[asignFixList[0].row][asignFixList[0].col].asignV = valueToFix;
+      matrixT[asignFixList[0].row][asignFixList[0].col].flagA = 1;
       for(let i = 1; i < asignFixList.length; i++){
         if(i%2){
-          matrixT[asignFixList[i].row][asignFixList[i].col].setAsignV(matrixT[asignFixList[i].row][asignFixList[i].col].asignV - valueToFix); 
+          matrixT[asignFixList[i].row][asignFixList[i].col].asignV = matrixT[asignFixList[i].row][asignFixList[i].col].asignV - valueToFix; 
           if (matrixT[asignFixList[i].row][asignFixList[i].col].asignV == 0){
-            matrixT[asignFixList[i].row][asignFixList[i].col].setFlag();
-            matrixT[asignFixList[i].row][asignFixList[i].col].setAsignV(null);
+            matrixT[asignFixList[i].row][asignFixList[i].col].flagA = 0;
+            matrixT[asignFixList[i].row][asignFixList[i].col].asignV = null;
           }
         }else{
-          matrixT[asignFixList[i].row][asignFixList[i].col].setAsignV(matrixT[asignFixList[i].row][asignFixList[i].col].asignV + valueToFix);
+          matrixT[asignFixList[i].row][asignFixList[i].col].asignV = matrixT[asignFixList[i].row][asignFixList[i].col].asignV + valueToFix;
         }
       }
     }else{
-      modiFlagSolve = 1;
+      localStorage.setItem('flagSolve', JSON.stringify(1));
     }
   }
   
@@ -535,7 +535,7 @@ function steppingStone(){
       }
     }
     if(minRCValue == 0){
-      stepStoneDone = 1;
+      localStorage.setItem('flagSolve', JSON.stringify(1));
       return
     }else{
       let asignFixList = loopAsign(rcCol, rcRow);
@@ -552,17 +552,17 @@ function steppingStone(){
           }
         }
       }
-      matrixT[asignFixList[0].row][asignFixList[0].col].setAsignV(valueToFix);
-      matrixT[asignFixList[0].row][asignFixList[0].col].setFlag();
+      matrixT[asignFixList[0].row][asignFixList[0].col].asignV = valueToFix;
+      matrixT[asignFixList[0].row][asignFixList[0].col].flagA = 1;
       for(let i = 1; i < asignFixList.length; i++){
         if(i%2){
-          matrixT[asignFixList[i].row][asignFixList[i].col].setAsignV(matrixT[asignFixList[i].row][asignFixList[i].col].asignV - valueToFix); 
+          matrixT[asignFixList[i].row][asignFixList[i].col].asignV =matrixT[asignFixList[i].row][asignFixList[i].col].asignV - valueToFix; 
           if (matrixT[asignFixList[i].row][asignFixList[i].col].asignV == 0){
-            matrixT[asignFixList[i].row][asignFixList[i].col].setFlag();
-            matrixT[asignFixList[i].row][asignFixList[i].col].setAsignV(null);
+            matrixT[asignFixList[i].row][asignFixList[i].col].flagA = 0;
+            matrixT[asignFixList[i].row][asignFixList[i].col].asignV = null;
           }
         }else{
-          matrixT[asignFixList[i].row][asignFixList[i].col].setAsignV(matrixT[asignFixList[i].row][asignFixList[i].col].asignV + valueToFix);
+          matrixT[asignFixList[i].row][asignFixList[i].col].asignV=matrixT[asignFixList[i].row][asignFixList[i].col].asignV + valueToFix;
         }
       }
     }
