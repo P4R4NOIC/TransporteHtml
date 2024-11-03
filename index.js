@@ -15,31 +15,40 @@ class tvalue{
   }
 
 }
-let a = [[4, 3, 0, 5], 
-        [1, 2, 6, 1], 
-        [3, 6, 2, 3]];
-let demand = [15, 19, 18, 8];
-let offer = [24, 17, 19];
-let matrixT = []
-let modiFlagSolve = 0;  //set items
-let stepStoneDone = 0;  //set items
+// let a = [[4, 3, 0, 5], 
+//         [1, 2, 6, 1], 
+//         [3, 6, 2, 3]];
+
+// let demand = [15, 19, 18, 8];
+let demand = JSON.parse(localStorage.getItem('demanda'));
+
+// let offer = [24, 17, 19];
+let offer = JSON.parse(localStorage.getItem('oferta'));
+let matrixT = JSON.parse(localStorage.getItem('newMatrix'));
+let modiFlagSolve = localStorage.getItem('flagSolve');  //set items
+let stepStoneDone = localStorage.getItem('flagSolve');  //set items
 
 
 // esta transformacion se hace a la matriz inicial 
-for (let i = 0; i < a.length; i++){
-  let c = []
-  for(let j = 0; j < a[i].length; j++){
-    let d = new tvalue(a[i][j], i, j);
-    c.push(d);
-  }
-  matrixT.push(c);
-}
+// for (let i = 0; i < a.length; i++){
+//   let c = []
+//   for(let j = 0; j < a[i].length; j++){
+//     let d = new tvalue(a[i][j], i, j);
+//     c.push(d);
+//   }
+//   matrixT.push(c);
+// }
 
+// matrixT.forEach(element => {
+//   element.forEach(value =>{
+//     console.log(value.value+(value.flagA?"("+value.asignV+")":""));
+//   });
+// });
 // la matrixT es la que se va a manejar para todo por lo que debe ser un item
 //si quiere representarlo matrixT[i][j].value y la asignacion esta en matrixT[i][j].asignV
 //podria utilizar esto matrixT[i][j].value+(matrixT[i][j].flagA?"("+matrixT[i][j].asignV+")":""); 
 //que usa el ternario para ver si hay asignacion para concatenar el valor asignado
-
+// console.log(matrixT[0][0].value+(matrixT[0][0].flagA?"("+matrixT[0][0].asignV+")":"") )
 
 function defineMovements(colM, rowM, come){
   let way = [];
@@ -173,7 +182,7 @@ function edgeNorWeast(){
       col++;
     }
   }
-
+  localStorage.setItem('newMatrix', JSON.stringify(matrixT));
 }
 function minCostMatrix( ){
   let dTemp = demand.slice();
@@ -224,6 +233,7 @@ function minCostMatrix( ){
       }
     }
   }
+  localStorage.setItem('newMatrix', JSON.stringify(matrixT));
 }
 
 function vogelMethod(){
@@ -557,4 +567,12 @@ function steppingStone(){
       }
     }
   }
+}
+
+function continueAlg(){
+  let firstSolution = +localStorage.getItem('firstSol');
+  if(firstSolution == 0){
+    edgeNorWeast();
+  }
+  window.location.reload();
 }

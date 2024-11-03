@@ -153,10 +153,39 @@ function processValue(){
     console.log("Demanda:", demanda);
     console.log("Oferta:", oferta);
 
-    localStorage.setItem('newMatrix', JSON.stringify(newMatrix));
+    let matrixT = []
+    for (let i = 0; i < newMatrix.length; i++){
+        let c = []
+        for(let j = 0; j < newMatrix[i].length; j++){
+            let d = new tvalue(newMatrix[i][j], i, j);
+            c.push(d);
+        }
+        matrixT.push(c);
+    }
+
+    localStorage.setItem('newMatrix', JSON.stringify(matrixT));
     localStorage.setItem('demanda', JSON.stringify(demanda));
     localStorage.setItem('oferta', JSON.stringify(oferta));
+
+    localStorage.setItem('flagSolve', 0);
 
     window.location.href = "resultado.html";
 
 }
+
+class tvalue{
+    constructor (val, posRow, posCol){
+      this.value = val;
+      this.asignV;
+      this.flagA = false;
+      this.col = posCol;
+      this.row = posRow;
+    }
+    setAsignV(v){
+      this.asignV = v;
+    }
+    setFlag(){
+       this.flagA = !this.flagA;
+    }
+  
+  }

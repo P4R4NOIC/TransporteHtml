@@ -12,7 +12,7 @@
     </div>
     
     <!-- <script src="simplex.js"></script> -->
-    <!-- <script src="ingresoValores.js"></script> -->
+    <script src="index.js"></script>
     <script>
         window.onload = function() {
     
@@ -20,11 +20,13 @@
             let newMatrix = JSON.parse(localStorage.getItem('newMatrix'));
             let demanda = JSON.parse(localStorage.getItem('demanda'));
             let oferta = JSON.parse(localStorage.getItem('oferta'));
-    
+            
+            
             // Unir oferta con newMatrix como la última columna
             newMatrix.forEach((fila, index) => {
-                fila.push(oferta[index] !== undefined ? oferta[index] : 0);  // Agregar oferta o 0 si no hay
+                fila.push(oferta[index] !== undefined ? { value: oferta[index] } : { value: 0 });
             });
+            console.log(newMatrix);
     
             // Crear la última fila con los valores de demanda más una celda vacía al final
             let demandaRow = [...demanda, 0];  // Agregar 0 al final como celda vacía para la oferta
@@ -68,7 +70,7 @@
                 // Añadir los valores de la fila
                 newMatrix[i].forEach(value => {
                     let td = document.createElement('td');
-                    td.textContent = value;
+                    td.textContent = value.value+(value.flagA?"("+value.asignV+")":"");
                     row.appendChild(td);
                 });
     
@@ -101,12 +103,10 @@
             // Crear el botón "Continuar"
             var continueButton = document.createElement('button');
             continueButton.type = 'button';
-            let bandera = +localStorage.getItem("bandera");
-            let nSol = +localStorage.getItem("cantidadSoluciones");
     
-            if (bandera == 0 || nSol) {
+            if (1) {
                 continueButton.onclick = function() {
-                    inicio(1); 
+                    continueAlg(); 
                 };
             } else {
                 continueButton.onclick = null; 
