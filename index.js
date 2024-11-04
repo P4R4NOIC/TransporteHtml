@@ -25,8 +25,8 @@ let demand = JSON.parse(localStorage.getItem('demanda'));
 // let offer = [24, 17, 19];
 let offer = JSON.parse(localStorage.getItem('oferta'));
 let matrixT = JSON.parse(localStorage.getItem('newMatrix'));
-let modiFlagSolve = localStorage.getItem('flagSolve');  //set items
-let stepStoneDone = localStorage.getItem('flagSolve');  //set items
+let modiFlagSolve = +localStorage.getItem('flagSolve');  //set items
+let stepStoneDone = +localStorage.getItem('flagSolve');  //set items
 
 
 // esta transformacion se hace a la matriz inicial 
@@ -368,6 +368,7 @@ function vogelMethod(){
   matrixT[lastAsign.row][lastAsign.col].flagA = 1;  
   oTemp[lastAsign.row]-= max;
   dTemp[lastAsign.col]-= max;
+  localStorage.setItem('newMatrix', JSON.stringify(matrixT));
 }
 
 
@@ -428,7 +429,7 @@ function modi(){
       for (let j = 0; j < matrixT[0].length; j++){
         if (vSubJ[j] != null){
           for (let i = 0; i < matrixT.length; i++){
-            if (uSubI[i] == null && b[i][j].flagA){
+            if (uSubI[i] == null && matrixT[i][j].flagA){
               console.log(matrixT[i][j].value, vSubJ[j])
               uSubI[i] = matrixT[i][j].value - vSubJ[j];
             }
@@ -486,8 +487,9 @@ function modi(){
           matrixT[asignFixList[i].row][asignFixList[i].col].asignV = matrixT[asignFixList[i].row][asignFixList[i].col].asignV + valueToFix;
         }
       }
+      localStorage.setItem('newMatrix', JSON.stringify(matrixT));
     }else{
-      localStorage.setItem('flagSolve', JSON.stringify(1));
+      localStorage.setItem('flagSolve', 1);
     }
   }
   
@@ -535,7 +537,7 @@ function steppingStone(){
       }
     }
     if(minRCValue == 0){
-      localStorage.setItem('flagSolve', JSON.stringify(1));
+      localStorage.setItem('flagSolve', 1);
       return
     }else{
       let asignFixList = loopAsign(rcCol, rcRow);
@@ -565,14 +567,46 @@ function steppingStone(){
           matrixT[asignFixList[i].row][asignFixList[i].col].asignV=matrixT[asignFixList[i].row][asignFixList[i].col].asignV + valueToFix;
         }
       }
+      localStorage.setItem('newMatrix', JSON.stringify(matrixT));
     }
   }
 }
 
 function continueAlg(){
   let firstSolution = +localStorage.getItem('firstSol');
-  if(firstSolution == 0){
-    edgeNorWeast();
+  let firstIteration = +localStorage.getItem('firstIteration');
+  if(!firstIteration){
+    if(firstSolution == 0){
+      edgeNorWeast();
+    }
+    if(firstSolution == 1){
+      minCostMatrix();
+    }
+    if(firstSolution == 2){
+      vogelMethod();
+    }
+    firstIteration = 1;
+    localStorage.setItem("firstIteration", firstIteration);
+    console.log("firstSolution: "+firstSolution);
+    console.log("firstIteration: "+firstIteration);
+    window.location.reload();
+  }else{
+    steppingORmodi();
   }
-  window.location.reload();
 }
+function steppingORmodi(){
+  let secondSolution = +localStorage.getItem('secondSol');
+  let flagSolve = +localStorage.getItem('flagSolve');
+  console.log("secondSolution: "+secondSolution);
+  console.log("flagSolve: "+flagSolve);
+  if(!flagSolve){
+  
+    if(secondSolution == 0){
+      steppingStone();
+    }
+    if(secondSolution == 1){
+      modi();
+    }
+    window.location.reload();
+  }
+};

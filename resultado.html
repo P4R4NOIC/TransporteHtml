@@ -103,8 +103,8 @@
             // Crear el botón "Continuar"
             var continueButton = document.createElement('button');
             continueButton.type = 'button';
-    
-            if (1) {
+            let flagSolve = +localStorage.getItem('flagSolve');
+            if (!flagSolve) {
                 continueButton.onclick = function() {
                     continueAlg(); 
                 };

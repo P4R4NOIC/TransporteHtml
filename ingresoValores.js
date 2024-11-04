@@ -166,7 +166,7 @@ function processValue(){
     localStorage.setItem('newMatrix', JSON.stringify(matrixT));
     localStorage.setItem('demanda', JSON.stringify(demanda));
     localStorage.setItem('oferta', JSON.stringify(oferta));
-
+    localStorage.setItem('firstIteration',0);
     localStorage.setItem('flagSolve', 0);
 
     window.location.href = "resultado.html";
