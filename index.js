@@ -376,8 +376,9 @@ function vogelMethod(){
 
 function modi(){
   if (!modiFlagSolve){
-
-  
+    if(applyDegradation){
+      degradationProcess();
+    }
     let rAsign = new Array(matrixT.length).fill(0);
     let cAsign = new Array(matrixT[0].length).fill(0);
     for (let i = 0; i< matrixT.length; i++){
@@ -493,6 +494,9 @@ function modi(){
 
 function steppingStone(){
   if (!stepStoneDone){
+    if(applyDegradation){
+      degradationProcess();
+    }
     let matrixRedChange = [];
     for (let i = 0; i < matrixT.length; i++){
       let mt = new Array(matrixT[0].length).fill(0);
@@ -581,6 +585,21 @@ function degradationProcess(){
   }
   matrixT[minRow][minCol].asignV = 0;
   matrixT[minRow][minCol].flagA = 1;
+}
+function applyDegradation(){
+  let counter = 0;
+  for (let i = 0; i<matrixT.length; i++){
+    for(let j = 0; j < matrixT[0].length; i++){
+      if(matrixT[i][j].flagA){
+        counter++;
+      }
+    }
+  }
+  if(counter == (matrixT.length+matrixT[0].length-1)){
+    return false;
+  }else{
+    return true;
+  }
 }
 
 function continueAlg(){
