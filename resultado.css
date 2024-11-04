@@ -32,6 +32,7 @@ table {
     width: 100%;
     border-collapse: collapse;
     margin-bottom: 20px;
+    margin-top: 20px;
     background-color: #ffffff; /* Mantiene el fondo blanco de la tabla */
     border-radius: 10px;
     overflow: hidden;

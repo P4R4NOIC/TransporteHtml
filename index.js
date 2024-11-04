@@ -157,7 +157,7 @@ function loopAsign(x, y){
     } 
   }
   matrixT.forEach(elementR =>{
-    elementR.map(element => element.asignV?element.flagA = true: element.flagA = false)
+    elementR.map(element => element.asignV != null?element.flagA = true: element.flagA = false)
   });
   asignList.pop();
   return asignList;
