@@ -565,6 +565,23 @@ function steppingStone(){
     }
   }
 }
+function degradationProcess(){
+  let minRow;
+  let minCol;
+  let minVal= (matrixT[0][0].value+1)*100;
+  for (let i = 0; i<matrixT.length; i++){
+    for(let j = 0; j < matrixT[0].length; i++){
+      let loop = loopAsign(j, i);
+      if(!matrixT[i][j].flagA && matrixT[i][j].value < minVal && loop.length < 2){
+        minCol= j;
+        minRow = i;
+        minVal = matrixT[i][j].value;
+      }
+    }
+  }
+  matrixT[minRow][minCol].asignV = 0;
+  matrixT[minRow][minCol].flagA = 1;
+}
 
 function continueAlg(){
   let firstSolution = +localStorage.getItem('firstSol');
