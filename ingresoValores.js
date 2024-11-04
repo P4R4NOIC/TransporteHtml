@@ -169,6 +169,7 @@ function processValue(){
     localStorage.setItem('oferta', JSON.stringify(oferta));
     localStorage.setItem('firstIteration',0);
     localStorage.setItem('flagSolve', 0);
+    localStorage.setItem('flagFirstSolutionText',0);
 
     window.location.href = "resultado.html";
 

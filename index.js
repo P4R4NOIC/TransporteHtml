@@ -645,7 +645,7 @@ function steppingORmodi(){
     if(secondSolution == 1){
       modi();
     }
-    //window.location.reload();
+    window.location.reload();
   }
 };
 function restarMaxValue(){

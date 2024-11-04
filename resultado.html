@@ -61,6 +61,9 @@
                 header.textContent = "Primera solución: "+firstSolText; 
             }else{
                 header.textContent = "Segunda solución: "+secondSolText; 
+                if(+localStorage.getItem("flagFirstSolutionText")==0){
+                    localStorage.setItem("flagFirstSolutionText",1);
+                }
             }
             
             header.classList.add('header-title');
@@ -165,7 +168,9 @@
     
             // Añadir el contenedor de botones al formContainer
             formContainer.appendChild(buttonContainer);
-            if (flagSolve) {
+            let firstIterationSolution = +localStorage.getItem("flagFirstSolutionText");
+            if (flagSolve || firstIterationSolution==1) {
+                localStorage.setItem("flagFirstSolutionText",2);
                 var answerContainer = document.getElementById('answerContainer');
                 
                 let header = document.createElement('h1');
