@@ -11,7 +11,7 @@ body {
     padding: 20px;
 }
 
-#formContainer, #formRespuesta, #formResumen, #formDual {
+#formContainer, #answerContainer {
     max-width: 900px;
     margin: 0 auto;
     margin-top: 20px;

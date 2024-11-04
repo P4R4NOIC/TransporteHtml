@@ -10,6 +10,9 @@
     <div id="formContainer" class="form-container"></div>
         <!-- El contenido generado se insertará aquí -->
     </div>
+    <div id="answerContainer" class="form-container"></div>
+        <!-- El contenido generado se insertará aquí -->
+    </div>
     
     <script src="index.js"></script>
     <script>
@@ -17,6 +20,7 @@
     
             // Obtener los datos de localStorage
             let newMatrix = JSON.parse(localStorage.getItem('newMatrix'));
+            console.log(newMatrix);
             let demanda = JSON.parse(localStorage.getItem('demanda'));
             let oferta = JSON.parse(localStorage.getItem('oferta'));
             let firstSol = +localStorage.getItem('firstSol');
@@ -153,6 +157,77 @@
     
             // Añadir el contenedor de botones al formContainer
             formContainer.appendChild(buttonContainer);
+            if (flagSolve) {
+                var answerContainer = document.getElementById('answerContainer');
+                
+                let header = document.createElement('h1');
+                header.textContent = "Respuesta"; 
+                header.classList.add('header-title');
+                answerContainer.appendChild(header);
+
+                let matriz = JSON.parse(localStorage.getItem('newMatrix'));
+                let ubicaciones = [];
+                let multiplicaciones = [];
+                let multiplicacionDeZ = 0;
+                // Iterar sobre la matriz
+                for (let row = 0; row < matriz.length; row++) {
+                    for (let col = 0; col < matriz[row].length; col++) {
+                        let elemento = matriz[row][col];
+                        
+                        
+
+                        // Verificar si asignV tiene un valor antes de multiplicar
+                        if (elemento.asignV !== undefined && elemento.asignV !== null) {
+                            // Crear la ubicación en formato "x[row][column]"
+                            let ubicacion = `x${row + 1}${col + 1}`;
+                            ubicaciones.push(ubicacion);
+                            let multiplicacion = elemento.asignV;
+                            multiplicaciones.push(multiplicacion);
+                            multiplicacionDeZ = multiplicacionDeZ + (elemento.value * elemento.asignV);
+                        }
+                    }
+                }
+                let ubicacion = 'Z';
+                ubicaciones.push(ubicacion);
+                multiplicaciones.push(multiplicacionDeZ);
+                
+
+                // Crear la tabla HTML
+                let tabla = document.createElement('table');
+
+                // Crear encabezados
+                let thead = document.createElement('thead');
+                let encabezado = document.createElement('tr');
+
+                // Agregar ubicaciones como encabezados
+                for (let ubicacion of ubicaciones) {
+                    let th = document.createElement('th');
+                    th.textContent = ubicacion;
+                    encabezado.appendChild(th);
+                }
+                thead.appendChild(encabezado);
+                tabla.appendChild(thead);
+
+                // Crear el cuerpo de la tabla
+                let tbody = document.createElement('tbody');
+                let filaMultiplicaciones = document.createElement('tr');
+
+                // Agregar las multiplicaciones en una fila
+                for (let multiplicacion of multiplicaciones) {
+                    let celdaMultiplicacion = document.createElement('td');
+                    celdaMultiplicacion.textContent = multiplicacion;
+                    filaMultiplicaciones.appendChild(celdaMultiplicacion);
+                }
+                tbody.appendChild(filaMultiplicaciones);
+
+                tabla.appendChild(tbody);
+
+                // Agregar la tabla al contenedor de respuesta
+                answerContainer.appendChild(tabla);
+            }
+
+
+
         };
     </script>
     
