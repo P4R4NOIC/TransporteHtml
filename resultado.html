@@ -11,7 +11,6 @@
         <!-- El contenido generado se insertará aquí -->
     </div>
     
-    <!-- <script src="simplex.js"></script> -->
     <script src="index.js"></script>
     <script>
         window.onload = function() {
@@ -20,8 +19,26 @@
             let newMatrix = JSON.parse(localStorage.getItem('newMatrix'));
             let demanda = JSON.parse(localStorage.getItem('demanda'));
             let oferta = JSON.parse(localStorage.getItem('oferta'));
-            
-            
+            let firstSol = +localStorage.getItem('firstSol');
+            let secondSol = +localStorage.getItem('secondSol'); 
+            let firstSolText = "";
+            let secondSolText = "";
+            if(firstSol == 0){
+                firstSolText = "Esquina Norte-Oeste";
+            }
+            if(firstSol == 1){
+                firstSolText = "Matriz Costo Mínimo";
+            }
+            if(firstSol == 2){
+                firstSolText = "Vogel";
+            }
+            if(secondSol == 0){
+                secondSolText = "Stepping Stone";
+            }
+            if(secondSol == 1){
+                secondSolText = "Modi/UV";
+            }
+
             // Unir oferta con newMatrix como la última columna
             newMatrix.forEach((fila, index) => {
                 fila.push(oferta[index] !== undefined ? { value: oferta[index] } : { value: 0 });
@@ -33,7 +50,19 @@
     
             // Definir el contenedor donde se insertará la tabla
             var formContainer = document.getElementById('formContainer');
-    
+            
+            let header = document.createElement('h1');
+            
+            if(!(+localStorage.getItem('firstIteration'))){
+                header.textContent = "Primera solución: "+firstSolText; 
+            }else{
+                header.textContent = "Segunda solución: "+secondSolText; 
+            }
+            
+            header.classList.add('header-title');
+            formContainer.appendChild(header);
+
+
             // Crear la tabla
             let table = document.createElement('table');
             table.setAttribute('border', '1');
