@@ -376,8 +376,9 @@ function vogelMethod(){
 
 function modi(){
   if (!modiFlagSolve){
-    if(applyDegradation){
+    if(applyDegradation()){
       degradationProcess();
+      return;
     }
     let rAsign = new Array(matrixT.length).fill(0);
     let cAsign = new Array(matrixT[0].length).fill(0);
@@ -438,7 +439,7 @@ function modi(){
     for (let i = 0; i < matrixT.length; i++){
       for (let j = 0; j < matrixT[0].length; j++){
         let opCost;
-        if (matrixT[i][j].flagA == 0 && (opCost = matrixT[i][j].value-(uSubI[i] + vSubJ[j])) < 0){
+        if (matrixT[i][j].flagA == false && (opCost = matrixT[i][j].value-(uSubI[i] + vSubJ[j])) < 0){
           if (rowValToFix == null){
             rowValToFix = i;
             colValToFix = j;
@@ -470,13 +471,14 @@ function modi(){
         }
       }
       matrixT[asignFixList[0].row][asignFixList[0].col].asignV = valueToFix;
-      matrixT[asignFixList[0].row][asignFixList[0].col].flagA = 1;
+      matrixT[asignFixList[0].row][asignFixList[0].col].flagA = true;
       for(let i = 1; i < asignFixList.length; i++){
         if(i%2){
           matrixT[asignFixList[i].row][asignFixList[i].col].asignV = matrixT[asignFixList[i].row][asignFixList[i].col].asignV - valueToFix; 
           if (matrixT[asignFixList[i].row][asignFixList[i].col].asignV == 0){
-            matrixT[asignFixList[i].row][asignFixList[i].col].flagA = 0;
             matrixT[asignFixList[i].row][asignFixList[i].col].asignV = null;
+            matrixT[asignFixList[i].row][asignFixList[i].col].flagA = false;
+            console.log(matrixT[asignFixList[i].row][asignFixList[i].col]);
           }
         }else{
           matrixT[asignFixList[i].row][asignFixList[i].col].asignV = matrixT[asignFixList[i].row][asignFixList[i].col].asignV + valueToFix;
@@ -494,7 +496,7 @@ function modi(){
 
 function steppingStone(){
   if (!stepStoneDone){
-    if(applyDegradation){
+    if(applyDegradation()){
       degradationProcess();
     }
     let matrixRedChange = [];
@@ -553,12 +555,12 @@ function steppingStone(){
         }
       }
       matrixT[asignFixList[0].row][asignFixList[0].col].asignV = valueToFix;
-      matrixT[asignFixList[0].row][asignFixList[0].col].flagA = 1;
+      matrixT[asignFixList[0].row][asignFixList[0].col].flagA = true;
       for(let i = 1; i < asignFixList.length; i++){
         if(i%2){
           matrixT[asignFixList[i].row][asignFixList[i].col].asignV =matrixT[asignFixList[i].row][asignFixList[i].col].asignV - valueToFix; 
           if (matrixT[asignFixList[i].row][asignFixList[i].col].asignV == 0){
-            matrixT[asignFixList[i].row][asignFixList[i].col].flagA = 0;
+            matrixT[asignFixList[i].row][asignFixList[i].col].flagA = false;
             matrixT[asignFixList[i].row][asignFixList[i].col].asignV = null;
           }
         }else{
@@ -574,9 +576,9 @@ function degradationProcess(){
   let minCol;
   let minVal= (matrixT[0][0].value+1)*100;
   for (let i = 0; i<matrixT.length; i++){
-    for(let j = 0; j < matrixT[0].length; i++){
+    for(let j = 0; j < matrixT[0].length; j++){
       let loop = loopAsign(j, i);
-      if(!matrixT[i][j].flagA && matrixT[i][j].value < minVal && loop.length < 2){
+      if(matrixT[i][j].flagA == false && matrixT[i][j].value < minVal && loop.length < 2){
         minCol= j;
         minRow = i;
         minVal = matrixT[i][j].value;
@@ -584,15 +586,21 @@ function degradationProcess(){
     }
   }
   matrixT[minRow][minCol].asignV = 0;
-  matrixT[minRow][minCol].flagA = 1;
+  matrixT[minRow][minCol].flagA = true;
+
+  localStorage.setItem('newMatrix', JSON.stringify(matrixT));
 }
 function applyDegradation(){
   let counter = 0;
   for (let i = 0; i<matrixT.length; i++){
-    for(let j = 0; j < matrixT[0].length; i++){
+    for(let j = 0; j < matrixT[0].length; j++){
+      if(matrixT[i][j].asignV != null && matrixT[i][j].flagA == false){
+        matrixT[i][j].flagA = true;
+      }
       if(matrixT[i][j].flagA){
         counter++;
       }
+      
     }
   }
   if(counter == (matrixT.length+matrixT[0].length-1)){
@@ -637,6 +645,6 @@ function steppingORmodi(){
     if(secondSolution == 1){
       modi();
     }
-    window.location.reload();
+    //window.location.reload();
   }
 };
