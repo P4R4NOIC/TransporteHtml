@@ -97,7 +97,7 @@ function loopAsign(x, y){
   let movements = [];
   let move = -1;
   movements.push(defineMovements(x, y, move));
-  console.log(movements);
+  
   let asignList = [];
   asignList.push(matrixT[y][x]);
   let posCol = x;
@@ -106,7 +106,7 @@ function loopAsign(x, y){
   //while(asd <13){
     
     if (movements.length){
-      console.log(movements);
+      
       move = movements[movements.length-1][0];
     }else{
       return [];
@@ -404,15 +404,7 @@ function modi(){
     if (cAsign[maxC] > rAsign[maxR]){
       vSubJ[maxC] = 0;
     }else{
-      if (cAsign[maxC] == rAsign[maxR]){
-        if(maxC < maxR){
-          vSubJ[maxC] = 0;
-        }else{
-          uSubI[maxR] = 0;
-        }
-      }else{
-        uSubI[maxR] = 0;
-      }
+      uSubI[maxR] = 0;
     }
     //sudoku
     while(uSubI.filter(valV => valV == null).length > 0 || vSubJ.filter(valV => valV == null).length){
@@ -420,7 +412,7 @@ function modi(){
         if (uSubI[i] != null){
           for (let j = 0; j < matrixT[0].length; j++){
             if (vSubJ[j] == null && matrixT[i][j].flagA){
-              console.log(matrixT[i][j].value, uSubI[i])
+              
               vSubJ[j] = matrixT[i][j].value - uSubI[i];
             }
           }
@@ -430,7 +422,7 @@ function modi(){
         if (vSubJ[j] != null){
           for (let i = 0; i < matrixT.length; i++){
             if (uSubI[i] == null && matrixT[i][j].flagA){
-              console.log(matrixT[i][j].value, vSubJ[j])
+              
               uSubI[i] = matrixT[i][j].value - vSubJ[j];
             }
           }
@@ -459,7 +451,7 @@ function modi(){
         }
       }
     }
-    if (rowValToFix){
+    if (rowValToFix != null){
       let asignFixList = loopAsign(colValToFix, rowValToFix);
       let valueToFix = null;
       for(let i = 1; i < asignFixList.length; i++){
