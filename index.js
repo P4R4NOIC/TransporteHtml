@@ -214,14 +214,16 @@ function minCostMatrix( ){
     let max = Math.min(dTemp[minAsignList[0].col], oTemp[minAsignList[0].row]);
     if (minAsignList.length > 1){
       min = minAsignList[0];
-      minAsignList.forEach(asignVal=>{
-        if (max < Math.min(dTemp[minAsignList[0].col], oTemp[minAsignList[0].row])){
-          min = asignVal;
-          max = Math.min(dTemp[minAsignList[0].col], oTemp[minAsignList[0].row]);
+      let i = 0;
+      for (let ai = 0; ai<minAsignList.length; ai++){
+        if (max < Math.min(dTemp[minAsignList[ai].col], oTemp[minAsignList[ai].row])){
+          min = minAsignList[ai];
+          max = Math.min(dTemp[minAsignList[ai].col], oTemp[minAsignList[ai].row]);
         }
-      });
+      }
     }
     matrixT[min.row][min.col].asignV = max; 
+    console.log(matrixT[min.row][min.col].asignV);
     matrixT[min.row][min.col].flagA = 1;  
     oTemp[min.row]-= max;
     dTemp[min.col]-= max;
@@ -581,7 +583,7 @@ function continueAlg(){
     localStorage.setItem("firstIteration", firstIteration);
     console.log("firstSolution: "+firstSolution);
     console.log("firstIteration: "+firstIteration);
-    window.location.reload();
+    //window.location.reload();
   }else{
     steppingORmodi();
   }
