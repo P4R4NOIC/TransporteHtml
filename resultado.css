@@ -1,12 +1,12 @@
 /* Estilos generales */
 body {
-    background-image: url("watermelon2.avif");
-    background-size: 300px 300px; /* Cambia el tamaño de la imagen */
+    background-image: url("b.png");
+    background-size: 200px 200px; /* Cambia el tamaño de la imagen */
     background-repeat: repeat; /* Hace que la imagen se repita */
     background-position: top left; /* Posiciona la imagen en la esquina superior izquierda */
     
     font-family: 'Arial', sans-serif;
-    background-color: #f0f8ff;
+    background-color: #f0f8ff; /* Fondo azul claro */
     margin: 0;
     padding: 20px;
 }
@@ -16,10 +16,15 @@ body {
     margin: 0 auto;
     margin-top: 20px;
     padding: 20px;
-    background-color: #ffffff;
+    background-color: #ffffff; /* Blanco para el contenedor */
     border-radius: 10px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
     overflow-x: auto;
+}
+
+.header-title {
+    text-align: center; /* Centrar el texto */
+    margin: 0; /* Opcional: quitar margen */
 }
 
 /* Estilos para la tabla */
@@ -41,7 +46,7 @@ th, td {
 
 /* Encabezado de la tabla */
 th {
-    background-color: #f28f8f; /* Rojo suave */
+    background-color: #be2d2d; /* Rojo oscuro */
     color: #ffffff; /* Texto blanco */
     font-weight: bold;
     text-transform: uppercase;
@@ -70,7 +75,7 @@ td:hover {
 /* Estilos para el botón */
 button {
     padding: 12px 24px;
-    background-color: #99d16d; /* Verde suave */
+    background-color: #f28f8f; /* Rojo claro */
     color: white;
     border: none;
     border-radius: 5px;
@@ -87,13 +92,13 @@ button:disabled {
 }
 
 button:hover {
-    background-color: #86c55a; /* Verde más oscuro */
+    background-color: #c9302c; /* Rojo más oscuro */
     transform: translateY(-2px); /* Efecto de "levantamiento" al hacer hover */
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
 }
 
 button:active {
-    background-color: #99d16d;
+    background-color: #f28f8f; /* Rojo claro */
     transform: translateY(0);
 }
 
@@ -104,4 +109,3 @@ button:last-of-type {
 button:last-of-type:hover {
     background-color: #ef5350; /* Rojo más intenso */
 }
-

@@ -1,12 +1,12 @@
 /* Estilos generales para el cuerpo */
 body {
-    background-image: url("watermelon.avif");
-    background-size: 300px 300px;
+    background-image: url("b.png");
+    background-size: 200px 200px;
     background-repeat: repeat;
     background-position: top left;
     
     font-family: Arial, sans-serif;
-    background-color: #f0f8ff;
+    background-color: #f0f8ff; /* Fondo azul claro */
     margin: 0;
     padding: 0;
     display: flex;
@@ -17,7 +17,7 @@ body {
 
 /* Estilos para el contenedor del formulario */
 #formContainer {
-    background-color: #99d16d;
+    background-color: #ffffff; /* Blanco para el contenedor */
     border-radius: 10px;
     box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.3);
     padding: 20px;
@@ -54,7 +54,7 @@ th, td {
 
 /* Aplicar estilo de encabezado a primera fila y primera columna */
 th, td:first-child, tr:first-child td {
-    background-color: #4CAF50;
+    background-color: #be2d2d; /* Rojo oscuro */
     color: white;
     font-weight: bold;
 }
@@ -69,7 +69,7 @@ input {
     width: 100%; /* Abarcar todo el ancho disponible */
     height: 100%; /* Abarcar todo el alto disponible */
     border: 0px solid black;
-    background-color: #6fe013;
+    background-color: #f8a59c; /* Rojo navideño */
     box-sizing: border-box; /* Asegura que el borde y el padding no afecten el tamaño del input */
     padding: 5px; /* Espacio interno del input */
     text-align: center;
@@ -78,20 +78,19 @@ input {
 
 /* Mejorar comportamiento al enfocar */
 input:focus {
-    border-color: #66afe9;
-    box-shadow: 0 0 10px rgb(0, 61, 10);
+    border-color: #f39c12; /* Naranja claro */
+    box-shadow: 0 0 10px rgba(231, 76, 60, 0.7);
     outline: none;
 }
 
 input[disabled] {
-    background-color: #4CAF50;
+    background-color: #be2d2d; /* Naranja */
     cursor: not-allowed;
 }
 
-
 /* Estilos para los botones */
 button {
-    background-color: #f28f8f;
+    background-color: #156E0C; 
     color: white;
     padding: 10px 15px;
     border: none;
@@ -103,12 +102,12 @@ button {
 }
 
 button:hover {
-    background-color: #c9302c;
+    background-color: #166e0cd2; 
     transform: translateY(-2px);
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
 }
 
 button:active {
-    background-color: #f28f8f;
+    background-color: #156E0C; 
     transform: translateY(0);
 }

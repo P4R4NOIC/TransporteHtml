@@ -1,12 +1,12 @@
 /* main.css */
 
 body {
-    background-image: url("watermelon.avif");
-    background-size: 300px 300px; /* Cambia el tamaño de la imagen */
-    background-repeat: repeat; /* Hace que la imagen se repita */
-    background-position: top left; /* Posiciona la imagen en la esquina superior izquierda */
+    background-image: url("b.png");
+    background-size: 200px 200px;
+    background-repeat: repeat;
+    background-position: top left;
     font-family: Arial, sans-serif;
-    background-color: #f0f8ff;
+    background-color: #f2f2f2; /* Fondo gris claro */
     margin: 0;
     padding: 0;
     display: flex;
@@ -16,7 +16,7 @@ body {
 }
 
 .form-container {
-    background-color: #99d16d; /* Verde suave */
+    background-color: #ffffff; /* Blanco para el fondo del formulario */
     padding: 20px;
     border-radius: 8px;
     box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.3);
@@ -27,7 +27,7 @@ label {
     font-size: small;
     display: block;
     margin-bottom: 5px;
-    color: black;
+    color: #c0392b; /* Rojo oscuro para el texto de las etiquetas */
 }
 
 select, input[type="text"], button {
@@ -35,35 +35,37 @@ select, input[type="text"], button {
     padding: 8px;
     margin-bottom: 15px;
     border-radius: 4px;
-    border: 1px solid #99d16d; /* Color de borde */
-    background-color: whitesmoke; /* Color de fondo */
+    border: 1px solid #d35400; /* Naranja para el borde */
+    background-color: #e74c3c; /* Rojo navideño */
+    color: #ffffff; /* Texto blanco */
     box-sizing: border-box;
 }
 
 select:focus, input[type="text"]:focus {
-    border-color: #99d16d; /* Borde al hacer foco */
-    background-color: rgba(245, 245, 245, 0.616); /* Color de fondo al hacer foco */
+    border-color: #f39c12; /* Naranja más claro */
+    background-color: rgba(231, 76, 60, 0.8); /* Fondo rojo al hacer foco */
     outline: none;
 }
 
-select{
-    color: #86c55a;
+select {
+    color: #ffffff; /* Texto blanco */
 }
 
 button {
-    background-color: #f28f8f; /* Rojo suave */
-    color: white;
+    background-color: #156E0C; 
+    color: #f7e7ce; 
     border: none;
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 button:hover {
-    background-color: #c9302c; /* Rojo más oscuro */
+    background-color: #166e0cd2;
     transform: translateY(-2px);
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
 }
+
 button:active {
-    background-color: #f28f8f;
+    background-color: #156E0C;
     transform: translateY(0);
 }
