@@ -144,6 +144,14 @@
             } else {
                 continueButton.onclick = null; 
                 continueButton.disabled = true;
+                let funcType = +localStorage.getItem("funcType");
+                let negado = +localStorage.getItem("negado");
+                if(funcType && !negado){
+                    continueButton.onclick = function() {
+                        restarMaxValue(); 
+                    };
+                    continueButton.disabled = false;
+                }
             }
             continueButton.textContent = 'Continuar';
             buttonContainer.appendChild(continueButton);

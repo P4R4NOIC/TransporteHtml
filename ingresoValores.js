@@ -143,7 +143,8 @@ function processValue(){
             ...newMatrix.flatMap(fila => fila) 
                 .filter(valor => typeof valor === 'number')
         );
-
+        localStorage.setItem("maxValue",maxValue);
+        localStorage.setItem("negado",0);
         newMatrix = newMatrix.map((fila) =>
             fila.map((valor) => maxValue - valor) 
         );       

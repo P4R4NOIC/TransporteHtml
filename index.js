@@ -640,3 +640,15 @@ function steppingORmodi(){
     window.location.reload();
   }
 };
+function restarMaxValue(){
+  maxValue = +localStorage.getItem("maxValue");
+  
+  matrixT.forEach(element => {
+    element.forEach(second => {
+      second.value = Math.abs(second.value-maxValue);
+    });
+  });
+  localStorage.setItem('newMatrix', JSON.stringify(matrixT));
+  localStorage.setItem("negado",1);
+  window.location.reload();
+}
