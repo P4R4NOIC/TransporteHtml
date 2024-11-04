@@ -583,7 +583,7 @@ function continueAlg(){
     localStorage.setItem("firstIteration", firstIteration);
     console.log("firstSolution: "+firstSolution);
     console.log("firstIteration: "+firstIteration);
-    //window.location.reload();
+    window.location.reload();
   }else{
     steppingORmodi();
   }
